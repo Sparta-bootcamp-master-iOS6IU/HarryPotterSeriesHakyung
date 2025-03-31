@@ -6,12 +6,19 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ViewController: UIViewController {
+    
+    private let harryPotterView = HarryPotterSeriseView()
+    
+    override func loadView() {
+        super.loadView()
+        view = harryPotterView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
 }
-
