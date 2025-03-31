@@ -29,14 +29,27 @@ struct BookResource: Codable {
     }
 }
 
-struct Chapter: Codable {
-    let title: String
-}
-
 struct DataItem: Codable {
     let attributes: BookResource
 }
 
-struct RootData: Codable {
+struct APIResponse: Codable {
     let data: [DataItem]
+}
+
+extension BookResource {
+    static func demo() -> [BookResource] {
+        return [
+            BookResource(
+                title: "nil",
+                author: "nil",
+                pages: 0,
+                releaseDate: "nil",
+                dedication: "nil",
+                summary: "nil",
+                wiki: "nil",
+                chapters: []
+            )
+        ]
+    }
 }
