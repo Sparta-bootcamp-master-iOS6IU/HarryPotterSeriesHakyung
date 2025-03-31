@@ -14,7 +14,7 @@ struct BookResource: Codable {
     let releaseDate: String
     let dedication: String
     let summary: String
-    let wiki: URL?
+    let wiki: String
     let chapters: [Chapter]
     
     enum CodingKeys: String, CodingKey {

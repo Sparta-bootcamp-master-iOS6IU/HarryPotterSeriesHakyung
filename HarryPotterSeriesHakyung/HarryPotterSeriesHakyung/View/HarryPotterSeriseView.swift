@@ -53,7 +53,7 @@ class HarryPotterSeriseView: UIView {
     private func configAutoLayout() {
 
         view.snp.makeConstraints {
-            $0.top.leading.bottom.trailing.equalTo(self.safeAreaLayoutGuide)
+            $0.edges.equalTo(self.safeAreaLayoutGuide)
         }
         
         titleLable.snp.makeConstraints {
@@ -68,8 +68,4 @@ class HarryPotterSeriseView: UIView {
             $0.centerX.equalToSuperview()
         }
     }
-}
-
-struct Constraints {
-    static let buttonLength: CGFloat = 48
 }

@@ -5,8 +5,6 @@
 //  Created by kingj on 3/31/25.
 //
 
-import Foundation
-
 /// LoadError
 ///
 /// 파일 / 데이터 로드 에러

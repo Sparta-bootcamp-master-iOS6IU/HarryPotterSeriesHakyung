@@ -25,22 +25,10 @@ class JSONLoader {
         
         do {
             let decoded = try JSONDecoder().decode(RootData.self, from: data)
-            let bookResource = decoded.data.map {
-                BookResource(
-                    title: $0.attributes.title,
-                    author: $0.attributes.author,
-                    pages: $0.attributes.pages,
-                    releaseDate: $0.attributes.releaseDate,
-                    dedication: $0.attributes.dedication,
-                    summary: $0.attributes.summary,
-                    wiki: $0.attributes.wiki,
-                    chapters: $0.attributes.chapters
-                )
-            }
+            let bookResource = decoded.data.map { $0.attributes }
             return bookResource
         } catch {
-            print(LoadError.decodingFailed)
-            print(error)
+            print(LoadError.decodingFailed, error)
             return nil
         }
     }
