@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let harryPotterView = HarryPotterSeriseView()
+    private let harryPotterView = HomeView()
     private var harryPotterViewModel: HarryPotterViewModel!
     
     // MARK: - Lifecycle Methods
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        harryPotterViewModel = HarryPotterViewModel(books: BookResource.demo())
+        harryPotterViewModel = HarryPotterViewModel(books: Book.demo())
     }
     
     override func viewDidAppear(_ animated: Bool) {
