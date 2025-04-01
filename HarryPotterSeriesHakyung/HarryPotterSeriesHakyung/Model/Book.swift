@@ -49,15 +49,8 @@ extension Book {
                 summary: "nil",
                 wiki: "nil",
                 chapters: [
-                    Chapter(title: "1. The Boy Who Lived"),
-                    Chapter(title: "2. The Vanishing Glass"),
-                    Chapter(title: "3. The Letter from No One"),
-                    Chapter(title: "1. The Boy Who Lived"),
-                    Chapter(title: "2. The Vanishing Glass"),
-                    Chapter(title: "3. The Letter from No One"),
-                    Chapter(title: "1. The Boy Who Lived"),
-                    Chapter(title: "2. The Vanishing Glass"),
-                    Chapter(title: "3. The Letter from No One"),
+                    Chapter(title: "nil"),
+                    Chapter(title: "nil"),
                 ]
             )
         ]
