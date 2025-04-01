@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Combine
+import SwiftUI
 
 class HarryPotterSeriseView: UIView {
     
@@ -35,8 +36,15 @@ class HarryPotterSeriseView: UIView {
     private var pagesLable = UILabel()
     private var pagesNumber = UILabel()
     
+    private var vStackForDedication = UIStackView()
+    private var dedicationLabel = UILabel()
+    private var dedicationContent = UILabel()
+    private var vStackForSummary = UIStackView()
+    private var summaryLabel = UILabel()
+    private var summaryContent = UILabel()
+    
     private var books: [BookResource] = BookResource.demo()
-    private var dataIndex: Int = 0
+    private var dataIndex: Int = .zero
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -75,10 +83,14 @@ class HarryPotterSeriseView: UIView {
         titleLable.text = books[dataIndex].title
         numberButton.setTitle("\(dataIndex + 1)", for: .normal)
         imageview.image = UIImage(named: "harrypotter\(dataIndex + 1)")
+        
         titleLableSmall.text = books[dataIndex].title
         authorName.text = books[dataIndex].author
         releasedDate.text = StringDateFormatter.formattedDateString(from: books[dataIndex].releaseDate)
         pagesNumber.text = "\(books[dataIndex].pages)"
+        
+        dedicationContent.text = "\(books[dataIndex].dedication)"
+        summaryContent.text = "\(books[dataIndex].summary)"
     }
     
     private func configUI() {
@@ -87,7 +99,7 @@ class HarryPotterSeriseView: UIView {
         // view
         addSubview(view)
         
-        [titleLable, numberButton, hStackView]
+        [titleLable, numberButton, hStackView, vStackForDedication, vStackForSummary]
             .forEach { view.addSubview($0) }
         
         // titleLable
@@ -125,7 +137,7 @@ class HarryPotterSeriseView: UIView {
         
         // hStackView
         hStackView.axis = .horizontal
-        hStackView.alignment = .firstBaseline
+        hStackView.alignment = .top
         hStackView.spacing = Constants.Spacing.spacing18
         
         // vStackView
@@ -174,6 +186,38 @@ class HarryPotterSeriseView: UIView {
         pagesNumber.text = "\(books[dataIndex].pages)"
         pagesNumber.font = .systemFont(ofSize: Constants.Text.textSize14)
         pagesNumber.textColor = Constants.Text.textColorGray
+        
+        [dedicationLabel, dedicationContent]
+            .forEach { vStackForDedication.addArrangedSubview($0) }
+        
+        [summaryLabel, summaryContent]
+            .forEach { vStackForSummary.addArrangedSubview($0) }
+        
+        // vStackForDedication
+        vStackForDedication.axis = .vertical
+        vStackForDedication.spacing = Constants.Spacing.spacing8
+        // dedicationLabel
+        dedicationLabel.text = "Dedication"
+        dedicationLabel.font = .systemFont(ofSize: Constants.Text.textSize18, weight: .bold)
+        dedicationLabel.textColor = Constants.Text.textColorDefault
+        // dedicationContent
+        dedicationContent.text = "\(books[dataIndex].dedication)"
+        dedicationContent.font = .systemFont(ofSize: Constants.Text.textSize14)
+        dedicationContent.textColor = Constants.Text.textColorDarkGray
+        dedicationContent.numberOfLines = .zero
+        
+        // vStackForSummary
+        vStackForSummary.axis = .vertical
+        vStackForSummary.spacing = Constants.Spacing.spacing8
+        // summaryLabel
+        summaryLabel.text = "Summary"
+        summaryLabel.font = .systemFont(ofSize: Constants.Text.textSize18, weight: .bold)
+        summaryLabel.textColor = Constants.Text.textColorDefault
+        // summaryContent
+        summaryContent.text = "\(books[dataIndex].summary)"
+        summaryContent.font = .systemFont(ofSize: Constants.Text.textSize14)
+        summaryContent.textColor = Constants.Text.textColorDarkGray
+        summaryContent.numberOfLines = .zero
     }
     
     private func configAutoLayout() {
@@ -196,13 +240,11 @@ class HarryPotterSeriseView: UIView {
         
         hStackView.snp.makeConstraints {
             $0.top.equalTo(numberButton.snp.bottom).offset(Constants.Spacing.spacing30)
-            $0.horizontalEdges.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().offset(Constants.Spacing.spacing25)
             $0.height.equalTo(Constants.Components.imageViewHeight)
         }
         
         imageview.snp.makeConstraints {
-            $0.top.equalTo(hStackView.snp.top)
-            $0.leading.equalTo(hStackView.snp.leading).offset(Constants.Spacing.spacing25)
             $0.width.equalTo(Constants.Components.imageViewWidth)
             $0.height.equalTo(Constants.Components.imageViewHeight)
         }
@@ -215,6 +257,39 @@ class HarryPotterSeriseView: UIView {
             $0.top.equalTo(vStackView.snp.top)
             $0.trailing.equalTo(hStackView.snp.trailing).inset(Constants.Spacing.spacing25)
         }
+        
+        vStackForDedication.snp.makeConstraints {
+            $0.top.equalTo(hStackView.snp.bottom).offset(Constants.Spacing.spacing24)
+            $0.leading.equalTo(imageview.snp.leading)
+            $0.trailing.equalToSuperview().inset(Constants.Spacing.spacing20)
+        }
+        
+        vStackForSummary.snp.makeConstraints {
+            $0.horizontalEdges.equalTo(vStackForDedication.snp.horizontalEdges)
+            $0.top.equalTo(vStackForDedication.snp.bottom).offset(Constants.Spacing.spacing24)
+        }
     }
     
 }
+
+
+// MARK: - SwiftUI Preview
+struct ViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        ViewControllerRepresentable()
+            .edgesIgnoringSafeArea(.all)
+//            .previewDevice("iPhone 16 Pro")
+    }
+}
+
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+
+    func makeUIViewController(context: Context) -> ViewController {
+        return ViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+        // 필요하면 업데이트 로직 추가
+    }
+}
+
