@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Constraints {
+enum Constants {
     
     enum Text {
         static let textSize14: CGFloat = 14

@@ -11,6 +11,8 @@ import Combine
 
 class HarryPotterSeriseView: UIView {
     
+    // MARK: - Components
+    
     private var view = UIView()
     private var titleLable = UILabel()
     private var numberButton = UIButton()
@@ -38,6 +40,8 @@ class HarryPotterSeriseView: UIView {
     
     private var subscriptions = Set<AnyCancellable>()
     
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configUI()
@@ -47,6 +51,8 @@ class HarryPotterSeriseView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Methods
     
     /// updateViewData
     ///
@@ -65,7 +71,7 @@ class HarryPotterSeriseView: UIView {
     ///
     /// Update된 [BookResource] 데이터를 UI에 적용
     /// Parameter: Update된 [BookResource] 데이터
-    func updateUI(_ books: [BookResource], _ dataIndex: Int) {
+    private func updateUI(_ books: [BookResource], _ dataIndex: Int) {
         titleLable.text = books[dataIndex].title
         numberButton.setTitle("\(dataIndex + 1)", for: .normal)
         imageview.image = UIImage(named: "harrypotter\(dataIndex + 1)")
@@ -87,16 +93,16 @@ class HarryPotterSeriseView: UIView {
         // titleLable
         titleLable.text = books[dataIndex].title
         titleLable.textAlignment = .center
-        titleLable.font = .systemFont(ofSize: Constraints.Text.textSize24, weight: .bold)
-        titleLable.textColor = Constraints.Text.textColorDefault
+        titleLable.font = .systemFont(ofSize: Constants.Text.textSize24, weight: .bold)
+        titleLable.textColor = Constants.Text.textColorDefault
         titleLable.numberOfLines = 2
         
         // numberButton
         numberButton.setTitle("\(dataIndex + 1)", for: .normal)
         numberButton.setTitleColor(.white, for: .normal)
-        numberButton.titleLabel?.font = .boldSystemFont(ofSize: Constraints.Components.buttonTitleSize)
-        numberButton.backgroundColor = Constraints.Components.buttonColor
-        numberButton.layer.cornerRadius = Constraints.Components.buttonLength / 2
+        numberButton.titleLabel?.font = .boldSystemFont(ofSize: Constants.Components.buttonTitleSize)
+        numberButton.backgroundColor = Constants.Components.buttonColor
+        numberButton.layer.cornerRadius = Constants.Components.buttonLength / 2
         
         [imageview, vStackView]
             .forEach { hStackView.addArrangedSubview($0) }
@@ -120,54 +126,54 @@ class HarryPotterSeriseView: UIView {
         // hStackView
         hStackView.axis = .horizontal
         hStackView.alignment = .firstBaseline
-        hStackView.spacing = Constraints.Spacing.spacing18
+        hStackView.spacing = Constants.Spacing.spacing18
         
         // vStackView
         vStackView.axis = .vertical
         vStackView.alignment = .top
-        vStackView.spacing = Constraints.Spacing.spacing8
+        vStackView.spacing = Constants.Spacing.spacing8
         
         // titleLableSmall
         titleLableSmall.text = books[dataIndex].title
-        titleLableSmall.font = .systemFont(ofSize: Constraints.Text.textSize20, weight: .bold)
-        titleLableSmall.textColor = Constraints.Text.textColorDefault
+        titleLableSmall.font = .systemFont(ofSize: Constants.Text.textSize20, weight: .bold)
+        titleLableSmall.textColor = Constants.Text.textColorDefault
         titleLableSmall.numberOfLines = 2
         
         // hStackForAuthor
         hStackForAuthor.axis = .horizontal
-        hStackForAuthor.spacing = Constraints.Spacing.spacing8
+        hStackForAuthor.spacing = Constants.Spacing.spacing8
         // authorLable
         authorLable.text = "Author"
-        authorLable.font = .systemFont(ofSize: Constraints.Text.textSize16, weight: .bold)
-        authorLable.textColor = Constraints.Text.textColorDefault
+        authorLable.font = .systemFont(ofSize: Constants.Text.textSize16, weight: .bold)
+        authorLable.textColor = Constants.Text.textColorDefault
         // authorName
         authorName.text = books[dataIndex].author
-        authorName.font = .systemFont(ofSize: Constraints.Text.textSize18)
-        authorName.textColor = Constraints.Text.textColorDarkGray
+        authorName.font = .systemFont(ofSize: Constants.Text.textSize18)
+        authorName.textColor = Constants.Text.textColorDarkGray
             
         // hStackForReleased
         hStackForReleased.axis = .horizontal
-        hStackForReleased.spacing = Constraints.Spacing.spacing8
+        hStackForReleased.spacing = Constants.Spacing.spacing8
         // releasedLable
         releasedLable.text = "Released"
-        releasedLable.font = .systemFont(ofSize: Constraints.Text.textSize14, weight: .bold)
-        releasedLable.textColor = Constraints.Text.textColorDefault
+        releasedLable.font = .systemFont(ofSize: Constants.Text.textSize14, weight: .bold)
+        releasedLable.textColor = Constants.Text.textColorDefault
         // releasedDate
         releasedDate.text = StringDateFormatter.formattedDateString(from: books[dataIndex].releaseDate)
-        releasedDate.font = .systemFont(ofSize: Constraints.Text.textSize14)
-        releasedDate.textColor = Constraints.Text.textColorGray
+        releasedDate.font = .systemFont(ofSize: Constants.Text.textSize14)
+        releasedDate.textColor = Constants.Text.textColorGray
         
         // hStackForPages
         hStackForPages.axis = .horizontal
-        hStackForPages.spacing = Constraints.Spacing.spacing8
+        hStackForPages.spacing = Constants.Spacing.spacing8
         // pagesLable
         pagesLable.text = "Pages"
-        pagesLable.font = .systemFont(ofSize: Constraints.Text.textSize14, weight: .bold)
-        pagesLable.textColor = Constraints.Text.textColorDefault
+        pagesLable.font = .systemFont(ofSize: Constants.Text.textSize14, weight: .bold)
+        pagesLable.textColor = Constants.Text.textColorDefault
         // pagesNumber
         pagesNumber.text = "\(books[dataIndex].pages)"
-        pagesNumber.font = .systemFont(ofSize: Constraints.Text.textSize14)
-        pagesNumber.textColor = Constraints.Text.textColorGray
+        pagesNumber.font = .systemFont(ofSize: Constants.Text.textSize14)
+        pagesNumber.textColor = Constants.Text.textColorGray
     }
     
     private func configAutoLayout() {
@@ -183,22 +189,22 @@ class HarryPotterSeriseView: UIView {
         }
         
         numberButton.snp.makeConstraints {
-            $0.width.height.equalTo(Constraints.Components.buttonLength)
+            $0.width.height.equalTo(Constants.Components.buttonLength)
             $0.top.equalTo(titleLable.snp.bottom).offset(16)
             $0.centerX.equalToSuperview()
         }
         
         hStackView.snp.makeConstraints {
-            $0.top.equalTo(numberButton.snp.bottom).offset(Constraints.Spacing.spacing30)
+            $0.top.equalTo(numberButton.snp.bottom).offset(Constants.Spacing.spacing30)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(Constraints.Components.imageViewHeight)
+            $0.height.equalTo(Constants.Components.imageViewHeight)
         }
         
         imageview.snp.makeConstraints {
             $0.top.equalTo(hStackView.snp.top)
-            $0.leading.equalTo(hStackView.snp.leading).offset(Constraints.Spacing.spacing25)
-            $0.width.equalTo(Constraints.Components.imageViewWidth)
-            $0.height.equalTo(Constraints.Components.imageViewHeight)
+            $0.leading.equalTo(hStackView.snp.leading).offset(Constants.Spacing.spacing25)
+            $0.width.equalTo(Constants.Components.imageViewWidth)
+            $0.height.equalTo(Constants.Components.imageViewHeight)
         }
         
         vStackView.snp.makeConstraints {
@@ -207,7 +213,7 @@ class HarryPotterSeriseView: UIView {
 
         titleLableSmall.snp.makeConstraints {
             $0.top.equalTo(vStackView.snp.top)
-            $0.trailing.equalTo(hStackView.snp.trailing).inset(Constraints.Spacing.spacing25)
+            $0.trailing.equalTo(hStackView.snp.trailing).inset(Constants.Spacing.spacing25)
         }
     }
     

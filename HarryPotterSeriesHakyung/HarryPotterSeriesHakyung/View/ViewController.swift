@@ -10,8 +10,12 @@ import Combine
 
 class ViewController: UIViewController {
     
+    // MARK: - Properties
+    
     private let harryPotterView = HarryPotterSeriseView()
     private var harryPotterViewModel: HarryPotterViewModel!
+    
+    // MARK: - Lifecycle Methods
     
     override func loadView() {
         super.loadView()
@@ -28,11 +32,13 @@ class ViewController: UIViewController {
         loadBooks()
     }
     
-    func loadBooks() {
+    // MARK: - Methods
+    
+    private func loadBooks() {
         checkBookResource()
     }
     
-    func checkBookResource() {
+    private func checkBookResource() {
         let result = harryPotterViewModel.appDidRun()
         switch result {
         case .success(let data):

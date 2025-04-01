@@ -10,12 +10,18 @@ import Combine
 
 final class HarryPotterViewModel {
     
+    // MARK: - Properties
+    
+    // Output: Data
+    let books: CurrentValueSubject<[BookResource], Never>
+    
+    // MARK: - Init
+    
     init(books: [BookResource]) {
         self.books = CurrentValueSubject(books)
     }
     
-    // Output: Data
-    let books: CurrentValueSubject<[BookResource], Never>
+    // MARK: - Methods
     
     // Input: User Action(= App Runed)
     func appDidRun() -> Result<[BookResource], ServiceError> {
