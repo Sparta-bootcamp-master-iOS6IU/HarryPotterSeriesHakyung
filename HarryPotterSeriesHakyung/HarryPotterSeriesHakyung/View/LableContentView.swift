@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import SwiftUI
 
 final class LableContentView: UIView {
     
@@ -70,24 +69,3 @@ final class LableContentView: UIView {
         }
     }
 }
-
-// MARK: - SwiftUI Preview
-struct ViewController_Preview31: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
-            .edgesIgnoringSafeArea(.all)
-//            .previewDevice("iPhone 16 Pro")
-    }
-}
-
-struct ViewControllerRepresentable31: UIViewControllerRepresentable {
-
-    func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
-        // 필요하면 업데이트 로직 추가
-    }
-}
-
