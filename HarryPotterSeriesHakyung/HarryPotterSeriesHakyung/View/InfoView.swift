@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 final class InfoView: UIView {
     
@@ -137,7 +138,7 @@ final class InfoView: UIView {
     private func configAutoLayout() {
         
         hStackView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(25)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(Constants.Components.imageViewHeight)
         }
         
@@ -152,8 +153,28 @@ final class InfoView: UIView {
         
         titleLableSmall.snp.makeConstraints {
             $0.top.equalTo(vStackView.snp.top)
-            $0.trailing.equalTo(hStackView.snp.trailing).inset(Constants.Spacing.spacing25)
+            $0.horizontalEdges.equalToSuperview()
         }
     }
 }
 
+
+// MARK: - SwiftUI Preview
+struct ViewController_Preview33: PreviewProvider {
+    static var previews: some View {
+        ViewControllerRepresentable()
+            .edgesIgnoringSafeArea(.all)
+//            .previewDevice("iPhone 16 Pro")
+    }
+}
+
+struct ViewControllerRepresentable33: UIViewControllerRepresentable {
+
+    func makeUIViewController(context: Context) -> ViewController {
+        return ViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+        // 필요하면 업데이트 로직 추가
+    }
+}

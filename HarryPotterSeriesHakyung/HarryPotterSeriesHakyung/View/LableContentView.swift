@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 final class LableContentView: UIView {
     
@@ -57,16 +58,36 @@ final class LableContentView: UIView {
     private func configAutoLayout() {
         
         label.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(Constants.Spacing.spacing25)
-            $0.top.equalToSuperview().offset(Constants.Spacing.spacing10)
+            $0.leading.equalToSuperview()
+            $0.top.equalToSuperview().offset(Constants.Spacing.spacing5)
         }
         
         content.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom).offset(Constants.Spacing.spacing8)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.Spacing.spacing25)
+            $0.horizontalEdges.equalToSuperview()
             $0.leading.equalTo(label.snp.leading)
-            $0.bottom.equalToSuperview().inset(Constants.Spacing.spacing10)
+            $0.bottom.equalToSuperview().inset(Constants.Spacing.spacing5)
         }
+    }
+}
+
+// MARK: - SwiftUI Preview
+struct ViewController_Preview31: PreviewProvider {
+    static var previews: some View {
+        ViewControllerRepresentable()
+            .edgesIgnoringSafeArea(.all)
+//            .previewDevice("iPhone 16 Pro")
+    }
+}
+
+struct ViewControllerRepresentable31: UIViewControllerRepresentable {
+
+    func makeUIViewController(context: Context) -> ViewController {
+        return ViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+        // 필요하면 업데이트 로직 추가
     }
 }
 
