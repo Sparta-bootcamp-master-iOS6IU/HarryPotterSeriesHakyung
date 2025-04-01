@@ -143,19 +143,19 @@ final class HomeView: UIView {
         }
         
         titleLable.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(Constants.Spacing.spacing10)
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(Constants.Spacing.spacing20)
         }
         
         numberButton.snp.makeConstraints {
             $0.width.height.equalTo(Constants.Components.buttonLength)
-            $0.top.equalTo(titleLable.snp.bottom).offset(16)
+            $0.top.equalTo(titleLable.snp.bottom).offset(Constants.Spacing.spacing16)
             $0.centerX.equalToSuperview()
         }
         
         scrollview.snp.makeConstraints {
-            $0.top.equalTo(numberButton.snp.bottom).offset(10)
+            $0.top.equalTo(numberButton.snp.bottom).offset(Constants.Spacing.spacing10)
             $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
             $0.bottom.equalTo(self.safeAreaLayoutGuide)
         }
@@ -167,7 +167,7 @@ final class HomeView: UIView {
         }
         
         vStackView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(25)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.Spacing.spacing25)
             $0.verticalEdges.equalToSuperview()
         }
         
@@ -188,7 +188,7 @@ final class HomeView: UIView {
         
         chapterView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(500)
+            $0.bottom.equalToSuperview()
         }
     }
     
