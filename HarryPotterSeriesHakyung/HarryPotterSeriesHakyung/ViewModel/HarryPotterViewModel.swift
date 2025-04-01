@@ -13,18 +13,18 @@ final class HarryPotterViewModel {
     // MARK: - Properties
     
     // Output: Data
-    let books: CurrentValueSubject<[BookResource], Never>
+    let books: CurrentValueSubject<[Book], Never>
     
     // MARK: - Init
     
-    init(books: [BookResource]) {
+    init(books: [Book]) {
         self.books = CurrentValueSubject(books)
     }
     
     // MARK: - Methods
     
     // Input: User Action(= App Runed)
-    func appDidRun() -> Result<[BookResource], ServiceError> {
+    func appDidRun() -> Result<[Book], ServiceError> {
         let result = DataService.fetchBooks(from: "data")
         switch result {
         case .success(let data):

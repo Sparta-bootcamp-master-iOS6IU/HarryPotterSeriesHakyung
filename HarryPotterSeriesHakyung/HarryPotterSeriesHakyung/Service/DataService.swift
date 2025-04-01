@@ -14,7 +14,7 @@ class DataService {
     ///
     /// Parameter: 해리포터 시리즈 데이터를 꺼내올 JSON file 이름
     /// Return: 해리포터 시리즈 데이터
-    static func fetchBooks(from fileName: String) -> Result<[BookResource], ServiceError> {
+    static func fetchBooks(from fileName: String) -> Result<[Book], ServiceError> {
         
         do {
             guard let file = Bundle.main.url(forResource: fileName, withExtension: "json") else {

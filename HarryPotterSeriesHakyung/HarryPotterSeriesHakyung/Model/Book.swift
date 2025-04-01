@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BookResource: Codable {
+struct Book: Codable {
     let title: String
     let author: String
     let pages: Int
@@ -30,17 +30,17 @@ struct BookResource: Codable {
 }
 
 struct DataItem: Codable {
-    let attributes: BookResource
+    let attributes: Book
 }
 
 struct APIResponse: Codable {
     let data: [DataItem]
 }
 
-extension BookResource {
-    static func demo() -> [BookResource] {
+extension Book {
+    static func demo() -> [Book] {
         return [
-            BookResource(
+            Book(
                 title: "nil",
                 author: "nil",
                 pages: 0,
