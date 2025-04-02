@@ -122,7 +122,7 @@ final class HomeView: UIView {
         
         scrollview.isScrollEnabled = true
         scrollview.alwaysBounceVertical = true
-        scrollview.showsVerticalScrollIndicator = true
+        scrollview.showsVerticalScrollIndicator = false
         scrollview.showsHorizontalScrollIndicator = false
         scrollview.isDirectionalLockEnabled = true
         

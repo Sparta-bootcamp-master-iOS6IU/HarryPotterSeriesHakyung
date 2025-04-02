@@ -47,7 +47,6 @@ final class ChapterView: UIView {
             vStackView.addArrangedSubview(chapter)
             return chapter
         }
-        vStackView.layoutIfNeeded()
     }
     
     private func configSubview() {
