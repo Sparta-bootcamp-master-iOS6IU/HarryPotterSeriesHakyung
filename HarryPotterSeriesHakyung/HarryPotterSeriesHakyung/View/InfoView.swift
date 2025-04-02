@@ -148,26 +148,3 @@ final class InfoView: UIView {
         }
     }
 }
-
-
-
-// MARK: - SwiftUI Preview
-
-struct ViewController_Preview3: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable3()
-            .edgesIgnoringSafeArea(.all)
-        //            .previewDevice("iPhone 16 Pro")
-    }
-}
-
-struct ViewControllerRepresentable3: UIViewControllerRepresentable {
-    
-    func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
-        // 필요하면 업데이트 로직 추가
-    }
-}
