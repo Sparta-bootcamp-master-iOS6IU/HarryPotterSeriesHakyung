@@ -48,7 +48,10 @@ extension Book {
                 dedication: "nil",
                 summary: "nil",
                 wiki: "nil",
-                chapters: []
+                chapters: [
+                    Chapter(title: "nil"),
+                    Chapter(title: "nil"),
+                ]
             )
         ]
     }

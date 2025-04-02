@@ -57,16 +57,15 @@ final class LableContentView: UIView {
     private func configAutoLayout() {
         
         label.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(Constants.Spacing.spacing25)
-            $0.top.equalToSuperview().offset(Constants.Spacing.spacing10)
+            $0.leading.equalToSuperview()
+            $0.top.equalToSuperview().offset(Constants.Spacing.spacing5)
         }
         
         content.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom).offset(Constants.Spacing.spacing8)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.Spacing.spacing25)
+            $0.horizontalEdges.equalToSuperview()
             $0.leading.equalTo(label.snp.leading)
-            $0.bottom.equalToSuperview().inset(Constants.Spacing.spacing10)
+            $0.bottom.equalToSuperview().inset(Constants.Spacing.spacing5)
         }
     }
 }
-

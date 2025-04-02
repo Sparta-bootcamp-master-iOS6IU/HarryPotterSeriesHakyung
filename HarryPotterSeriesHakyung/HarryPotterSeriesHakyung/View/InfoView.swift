@@ -137,7 +137,7 @@ final class InfoView: UIView {
     private func configAutoLayout() {
         
         hStackView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(25)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(Constants.Components.imageViewHeight)
         }
         
@@ -152,8 +152,7 @@ final class InfoView: UIView {
         
         titleLableSmall.snp.makeConstraints {
             $0.top.equalTo(vStackView.snp.top)
-            $0.trailing.equalTo(hStackView.snp.trailing).inset(Constants.Spacing.spacing25)
+            $0.horizontalEdges.equalToSuperview()
         }
     }
 }
-

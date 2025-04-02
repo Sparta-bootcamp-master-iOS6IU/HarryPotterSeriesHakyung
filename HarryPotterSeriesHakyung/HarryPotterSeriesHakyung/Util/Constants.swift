@@ -35,6 +35,7 @@ enum Constants {
         static let spacing5: CGFloat = 5
         static let spacing8: CGFloat = 8
         static let spacing10: CGFloat = 10
+        static let spacing16: CGFloat = 16
         static let spacing18: CGFloat = 18
         static let spacing20: CGFloat = 20
         static let spacing24: CGFloat = 24
