@@ -23,10 +23,6 @@ final class HomeView: UIView {
     private var contentSubView = UIView()
     private var vStackView = UIStackView()
     
-    // BOOK DATA
-    private var books: [Book] = Book.demo()
-    private var dataIndex: Int = .zero
-    
     // COMBINE
     private var subscriptions = Set<AnyCancellable>()
 
@@ -43,7 +39,6 @@ final class HomeView: UIView {
         super.init(frame: .zero)
         configSubview()
         configUI()
-        configData(with: books[dataIndex])
         configAutoLayout()
     }
     
@@ -61,7 +56,7 @@ final class HomeView: UIView {
         viewModel.books
             .receive(on: RunLoop.main)
             .sink { [unowned self] books in
-                self.dataIndex = Int.random(in: 0..<books.count)
+                let dataIndex = Int.random(in: 0..<books.count)
                 updateUI(books, dataIndex)
             }.store(in: &subscriptions)
     }
@@ -72,8 +67,7 @@ final class HomeView: UIView {
     /// Parameter: Update된 [BookResource] 데이터
     private func updateUI(_ books: [Book], _ dataIndex: Int) {
         // HomeView
-        titleLable.text = books[dataIndex].title
-        numberButton.setTitle("\(dataIndex + 1)", for: .normal)
+        configData(with: books[dataIndex], dataIndex)
         
         // InfoView
         infoView.configData(with: books[dataIndex], dataIndex)
@@ -192,9 +186,9 @@ final class HomeView: UIView {
         }
     }
     
-    private func configData(with book: Book) {
+    private func configData(with book: Book, _ dataIndex: Int) {
         
-        titleLable.text = books[dataIndex].title
+        titleLable.text = book.title
         numberButton.setTitle("\(dataIndex + 1)", for: .normal)
     }
 }
