@@ -7,24 +7,25 @@
 
 import UIKit
 import Combine
+import SnapKit
 
 class ViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let harryPotterView = HomeView()
-    private var harryPotterViewModel: HarryPotterViewModel!
+    private let homeView = HomeView()
+    private var homeViewModel: HomeViewModel!
     
     // MARK: - Lifecycle Methods
     
     override func loadView() {
         super.loadView()
-        view = harryPotterView
+        view = homeView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        harryPotterViewModel = HarryPotterViewModel(books: Book.demo())
+        homeViewModel = HomeViewModel(books: Book.demo())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,10 +40,10 @@ class ViewController: UIViewController {
     }
     
     private func checkBookResource() {
-        let result = harryPotterViewModel.appDidRun()
+        let result = homeViewModel.appDidRun()
         switch result {
-        case .success(let data):
-            harryPotterView.updateViewData(from: harryPotterViewModel)
+        case .success(_):
+            homeView.updateViewData(from: homeViewModel)
             
         case .failure(let error):
             let alert = UIAlertController(

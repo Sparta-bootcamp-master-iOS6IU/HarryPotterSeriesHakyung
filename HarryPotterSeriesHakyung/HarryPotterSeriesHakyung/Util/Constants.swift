@@ -22,10 +22,13 @@ enum Constants {
         static let textColorDarkGray: UIColor = .darkGray
     }
     
+    enum Color {
+        static let blue: UIColor = .systemBlue
+    }
+    
     enum Components {
         static let buttonTitleSize: CGFloat = 16
         static let buttonLength: CGFloat = 48
-        static let buttonColor: UIColor = .systemBlue
         
         static let imageViewWidth: CGFloat = 100
         static let imageViewHeight: CGFloat = imageViewWidth * 1.5
