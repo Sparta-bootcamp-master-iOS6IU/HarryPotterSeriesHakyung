@@ -79,13 +79,13 @@ extension LableContentView {
 extension LableContentView: MoreLessButtonDelegate {
     
     func didMoreLessButtonToggle(toggle isExpanded: Bool, _ text: String) {
-        let titleLable = self.label.text ?? "[Nil] Summary"
+        let titleLable = self.label.text
         
         if isExpanded {
-            configData(with: titleLable, contentText: text)
+            configData(with: titleLable!, contentText: text)
         } else {
             let truncatedText = self.truncateWithEllipsis(from: text)
-            configData(with: titleLable, contentText: truncatedText)
+            configData(with: titleLable!, contentText: truncatedText)
         }
     }
 }

@@ -57,7 +57,9 @@ final class HomeView: UIView {
             .receive(on: RunLoop.main)
             .sink { [weak self] books in
                 guard let self = self else { return }
-                let dataIndex = Int.random(in: 0..<books.count)
+                // Comment For Level 5
+                // let dataIndex = Int.random(in: 0..<books.count)
+                let dataIndex = 5
                 self.updateUI(books, dataIndex)
             }.store(in: &subscriptions)
     }
@@ -82,8 +84,8 @@ final class HomeView: UIView {
         summaryView.configData(with: "Summary", contentText: truncatedSummary)
         
         // MoreLessButton
-        moreLessButton.configData(with: books[dataIndex].summary)
         moreLessButton.delegate = summaryView
+        moreLessButton.configData(with: books[dataIndex].summary, dataIndex: dataIndex)
         
         // ChapterView
         chapterView.configData(with: books[dataIndex].chapters)
@@ -125,20 +127,21 @@ final class HomeView: UIView {
         numberButton.backgroundColor = Constants.Color.blue
         numberButton.layer.cornerRadius = Constants.Components.buttonLength / 2
         
+        // scrollview
         scrollview.isScrollEnabled = true
         scrollview.alwaysBounceVertical = true
         scrollview.showsVerticalScrollIndicator = false
         scrollview.showsHorizontalScrollIndicator = false
         scrollview.isDirectionalLockEnabled = true
         
+        // vStackView
         vStackView.axis = .vertical
         vStackView.spacing = Constants.Spacing.spacing24
     }
     
     private func configAutoLayout() {
         contentView.snp.makeConstraints {
-            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
-            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.top.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
         }
         
         titleLable.snp.makeConstraints {
@@ -155,8 +158,7 @@ final class HomeView: UIView {
         
         scrollview.snp.makeConstraints {
             $0.top.equalTo(numberButton.snp.bottom).offset(Constants.Spacing.spacing10)
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.bottom.equalToSuperview()
         }
         
         scrollview.contentLayoutGuide.snp.makeConstraints {
@@ -171,7 +173,6 @@ final class HomeView: UIView {
         vStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.Spacing.spacing10)
             $0.horizontalEdges.equalToSuperview().inset(Constants.Spacing.spacing25)
-            $0.bottom.equalToSuperview()
         }
     }
 }

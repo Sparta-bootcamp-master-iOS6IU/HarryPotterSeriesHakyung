@@ -18,8 +18,9 @@ final class MoreLessButton: UIView {
 
     var button = UIButton()
     
-    private var isExpanded: Bool = false
+    private var isExpanded: Bool!
     private var receivedText: String!
+    private var receivedDataIndex: String!
     
     // MARK: - Init
     
@@ -36,17 +37,34 @@ final class MoreLessButton: UIView {
     
     // MARK: - Methods
     
-    func configData(with text: String) {
+    func configData(with text: String, dataIndex: Int) {
         self.receivedText = text
+        self.receivedDataIndex = "\(dataIndex)"
+        
         button.isHidden = text.count < 450
+        
+        getIsExpandedState()
         configButtonTitle()
+        delegate?.didMoreLessButtonToggle(toggle: isExpanded, receivedText)
     }
     
+    // UserDefaults
+    // Key: Book index, value: [isExpended state]
     private func configButtonTitle() {
         if isExpanded {
             button.setTitle("접기", for: .normal)
         } else {
             button.setTitle("더 보기", for: .normal)
+        }
+        UserDefaults.standard.set([isExpanded], forKey: self.receivedDataIndex)
+    }
+    
+    private func getIsExpandedState() {
+        if let value = UserDefaults.standard.array(forKey: self.receivedDataIndex) as? [Bool] {
+            isExpanded = value.first!
+        } else { // 앱 처음 실행
+            isExpanded = false
+            UserDefaults.standard.set([isExpanded], forKey: self.receivedDataIndex)
         }
     }
     
