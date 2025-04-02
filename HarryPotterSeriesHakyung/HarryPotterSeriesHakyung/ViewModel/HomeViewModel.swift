@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class HarryPotterViewModel {
+final class HomeViewModel {
     
     // MARK: - Properties
     
