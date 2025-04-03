@@ -14,7 +14,6 @@ final class HomeView: UIView {
     // MARK: - Components
     
     // UI
-    private var view = UIView()
     private var contentView = UIView()
     private var titleLable = UILabel()
     private var numberButton = UIButton()
@@ -22,10 +21,6 @@ final class HomeView: UIView {
     private var scrollview = UIScrollView()
     private var contentSubView = UIView()
     private var vStackView = UIStackView()
-    
-    // BOOK DATA
-    private var books: [Book] = Book.demo()
-    private var dataIndex: Int = .zero
     
     // COMBINE
     private var subscriptions = Set<AnyCancellable>()
@@ -36,6 +31,7 @@ final class HomeView: UIView {
     private let dedicationView = LableContentView()
     private let summaryView = LableContentView()
     private let chapterView = ChapterView()
+    private let moreLessButton = MoreLessButton()
     
     // MARK: - Init
     
@@ -43,7 +39,6 @@ final class HomeView: UIView {
         super.init(frame: .zero)
         configSubview()
         configUI()
-        configData(with: books[dataIndex])
         configAutoLayout()
     }
     
@@ -57,12 +52,15 @@ final class HomeView: UIView {
     ///
     /// Published된 [BookResource]를 Subscribe하여 Receive 한다.
     /// Parameter: ViewController에서 넘어온 HarryPotterViewModel
-    func updateViewData(from viewModel: HarryPotterViewModel) {
+    func updateViewData(from viewModel: HomeViewModel) {
         viewModel.books
             .receive(on: RunLoop.main)
-            .sink { [unowned self] books in
-                self.dataIndex = Int.random(in: 0..<books.count)
-                updateUI(books, dataIndex)
+            .sink { [weak self] books in
+                guard let self = self else { return }
+                // Comment For Level 5
+                // let dataIndex = Int.random(in: 0..<books.count)
+                let dataIndex = 5
+                self.updateUI(books, dataIndex)
             }.store(in: &subscriptions)
     }
     
@@ -72,28 +70,35 @@ final class HomeView: UIView {
     /// Parameter: Update된 [BookResource] 데이터
     private func updateUI(_ books: [Book], _ dataIndex: Int) {
         // HomeView
-        titleLable.text = books[dataIndex].title
-        numberButton.setTitle("\(dataIndex + 1)", for: .normal)
+        configData(with: books[dataIndex], dataIndex)
         
         // InfoView
         infoView.configData(with: books[dataIndex], dataIndex)
         
         // LableContentView - Dedication
         dedicationView.configData(with: "Dedication", contentText: books[dataIndex].dedication)
-        
+
         // LableContentView - Summary
-        summaryView.configData(with: "Summary", contentText: books[dataIndex].summary)
+        let summary = books[dataIndex].summary
+        let truncatedSummary = summaryView.truncateWithEllipsis(from: summary)
+        summaryView.configData(with: "Summary", contentText: truncatedSummary)
+        
+        // MoreLessButton
+        moreLessButton.delegate = summaryView
+        moreLessButton.configData(with: books[dataIndex].summary, dataIndex: dataIndex)
         
         // ChapterView
         chapterView.configData(with: books[dataIndex].chapters)
     }
     
+    private func configData(with book: Book, _ dataIndex: Int) {
+        titleLable.text = book.title
+        numberButton.setTitle("\(dataIndex + 1)", for: .normal)
+    }
+    
     private func configSubview() {
-
-        addSubview(view)
-        
         [contentView, scrollview]
-            .forEach { view.addSubview($0) }
+            .forEach { addSubview($0) }
         
         [titleLable, numberButton]
             .forEach { contentView.addSubview($0) }
@@ -101,8 +106,10 @@ final class HomeView: UIView {
         [contentSubView, vStackView]
             .forEach { scrollview.addSubview($0) }
         
-        [infoView, dedicationView, summaryView, chapterView]
+        [infoView, dedicationView, summaryView, moreLessButton, chapterView]
             .forEach { vStackView.addArrangedSubview($0) }
+        
+        vStackView.bringSubviewToFront(moreLessButton)
     }
     
     private func configUI() {
@@ -117,33 +124,28 @@ final class HomeView: UIView {
         // numberButton
         numberButton.setTitleColor(.white, for: .normal)
         numberButton.titleLabel?.font = .boldSystemFont(ofSize: Constants.Components.buttonTitleSize)
-        numberButton.backgroundColor = Constants.Components.buttonColor
+        numberButton.backgroundColor = Constants.Color.blue
         numberButton.layer.cornerRadius = Constants.Components.buttonLength / 2
         
+        // scrollview
         scrollview.isScrollEnabled = true
         scrollview.alwaysBounceVertical = true
         scrollview.showsVerticalScrollIndicator = false
         scrollview.showsHorizontalScrollIndicator = false
         scrollview.isDirectionalLockEnabled = true
         
+        // vStackView
         vStackView.axis = .vertical
         vStackView.spacing = Constants.Spacing.spacing24
     }
     
     private func configAutoLayout() {
-        
-        view.snp.makeConstraints {
-            $0.edges.equalTo(self.safeAreaLayoutGuide)
-        }
-        
         contentView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
-            $0.top.equalToSuperview()
-            $0.centerX.equalToSuperview()
+            $0.top.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
         }
         
         titleLable.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(Constants.Spacing.spacing10)
+            $0.top.equalToSuperview().offset(Constants.Spacing.spacing10)
             $0.centerX.equalToSuperview()
             $0.leading.equalToSuperview().offset(Constants.Spacing.spacing20)
         }
@@ -156,45 +158,21 @@ final class HomeView: UIView {
         
         scrollview.snp.makeConstraints {
             $0.top.equalTo(numberButton.snp.bottom).offset(Constants.Spacing.spacing10)
-            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+        
+        scrollview.contentLayoutGuide.snp.makeConstraints {
+            $0.edges.equalTo(contentSubView)
         }
         
         contentSubView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
-            $0.bottom.equalTo(vStackView.snp.bottom)
+            $0.height.equalTo(vStackView.snp.height)
         }
         
         vStackView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(Constants.Spacing.spacing10)
             $0.horizontalEdges.equalToSuperview().inset(Constants.Spacing.spacing25)
-            $0.verticalEdges.equalToSuperview()
         }
-        
-        infoView.snp.makeConstraints {
-            $0.top.equalTo(vStackView.snp.top).offset(Constants.Spacing.spacing30)
-            $0.height.equalTo(Constants.Components.imageViewHeight)
-        }
-        
-        dedicationView.snp.makeConstraints {
-            $0.top.equalTo(infoView.snp.bottom).offset(Constants.Spacing.spacing24)
-            $0.horizontalEdges.equalToSuperview()
-        }
-        
-        summaryView.snp.makeConstraints {
-            $0.top.equalTo(dedicationView.snp.bottom)
-            $0.horizontalEdges.equalToSuperview()
-        }
-        
-        chapterView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-    }
-    
-    private func configData(with book: Book) {
-        
-        titleLable.text = books[dataIndex].title
-        numberButton.setTitle("\(dataIndex + 1)", for: .normal)
     }
 }

@@ -6,10 +6,7 @@
 //
 
 import UIKit
-
-protocol CustomViewDelegate: AnyObject {
-    func didUpdateData(with chapters: [Chapter])
-}
+import SnapKit
 
 final class ChapterView: UIView {
     
@@ -50,7 +47,6 @@ final class ChapterView: UIView {
     }
     
     private func configSubview() {
-        
         addSubview(vStackView)
         
         [chaptersLabel]
@@ -61,7 +57,6 @@ final class ChapterView: UIView {
     }
     
     private func configUI() {
-        
         vStackView.axis = .vertical
         vStackView.spacing = Constants.Spacing.spacing8
         
@@ -70,20 +65,8 @@ final class ChapterView: UIView {
     }
     
     private func configAutoLayout() {
-        
         vStackView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
-        }
-        
-        chaptersLabel.snp.makeConstraints {
-            $0.top.equalTo(vStackView.snp.top)
-            $0.horizontalEdges.equalToSuperview()
-        }
-        
-        chapterContents.forEach {
-            $0.snp.makeConstraints {
-                $0.leading.equalToSuperview()
-            }
+            $0.edges.equalToSuperview()
         }
     }
 }

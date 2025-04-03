@@ -5,8 +5,8 @@
 //  Created by kingj on 4/1/25.
 //
 
-import Foundation
 import UIKit
+import SnapKit
 
 final class InfoView: UIView {
     
@@ -138,21 +138,12 @@ final class InfoView: UIView {
         
         hStackView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(Constants.Components.imageViewHeight)
+            $0.verticalEdges.equalToSuperview()
         }
         
         imageview.snp.makeConstraints {
             $0.width.equalTo(Constants.Components.imageViewWidth)
             $0.height.equalTo(Constants.Components.imageViewHeight)
-        }
-        
-        vStackView.snp.makeConstraints {
-            $0.top.equalTo(imageview.snp.top)
-        }
-        
-        titleLableSmall.snp.makeConstraints {
-            $0.top.equalTo(vStackView.snp.top)
-            $0.horizontalEdges.equalToSuperview()
         }
     }
 }
