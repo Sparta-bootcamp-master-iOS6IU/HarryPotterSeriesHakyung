@@ -23,7 +23,7 @@ final class HomeViewModel {
     
     // MARK: - Methods
     
-    // Input: User Action(= App Runed)
+    // Input: User Action(= App Did Run)
     func appDidRun() -> Result<[Book], ServiceError> {
         let result = DataService.fetchBooks(from: "data")
         switch result {
