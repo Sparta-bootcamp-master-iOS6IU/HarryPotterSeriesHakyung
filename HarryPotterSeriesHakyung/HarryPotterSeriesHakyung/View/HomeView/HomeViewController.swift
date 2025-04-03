@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         homeViewModel = HomeViewModel(books: Book.demo())
-        homeView.bookSeriseButton.delegate = self
+        homeView.bookSeriesButton.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,10 +63,8 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: BookSeriseButtonDelegate {
-    func buttonDidTapped(index: Int) {
-        let currentBooks = self.homeViewModel.books.value
-        let newBooks: [Book] = [currentBooks[index]]
-        self.homeViewModel.books.send(newBooks)
+extension HomeViewController: BookSeriesButtonDelegate {
+    func buttonDidTapped(book: Book) {
+        self.homeViewModel.selectBook(book)
     }
 }

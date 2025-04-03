@@ -30,7 +30,7 @@ enum Constants {
     
     enum Components {
         static let buttonTitleSize: CGFloat = 16
-        static let buttonSize: CGFloat = 34
+        static let buttonSize: CGFloat = 38
         
         static let imageViewWidth: CGFloat = 100
         static let imageViewHeight: CGFloat = imageViewWidth * 1.5

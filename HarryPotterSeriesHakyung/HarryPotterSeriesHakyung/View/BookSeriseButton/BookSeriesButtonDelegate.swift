@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol BookSeriseButtonDelegate: AnyObject {
-    func buttonDidTapped(index: Int)
+protocol BookSeriesButtonDelegate: AnyObject {
+    func buttonDidTapped(book: Book)
 }

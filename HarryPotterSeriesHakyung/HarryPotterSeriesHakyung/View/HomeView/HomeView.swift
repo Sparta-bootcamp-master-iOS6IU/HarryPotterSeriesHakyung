@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 import Combine
-import SwiftUI
 
 final class HomeView: UIView {
     
@@ -27,7 +26,7 @@ final class HomeView: UIView {
 
     // MARK: - Custom Views
     
-    var bookSeriseButton = BookSeriseButton()
+    var bookSeriesButton = BookSeriesButton()
     private let infoView = InfoView()
     private let dedicationView = LabelContentView()
     private let summaryView = LabelContentView()
@@ -55,10 +54,17 @@ final class HomeView: UIView {
     /// Parameter: ViewController에서 넘어온 HarryPotterViewModel
     func updateViewData(from viewModel: HomeViewModel) {
         viewModel.books
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] books in
                 guard let self else { return }
                 self.updateUI(with: books)
+            }.store(in: &subscriptions)
+        
+        viewModel.selectedBook
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] book in
+                guard let book else { return }
+                self?.updateUI(with: [book])
             }.store(in: &subscriptions)
     }
     
@@ -73,7 +79,7 @@ final class HomeView: UIView {
         configData(with: book)
         
         // BookSeriseButton
-        bookSeriseButton.configData(with: books)
+        bookSeriesButton.configData(with: books)
         
         // InfoView
         infoView.configData(with: book)
@@ -101,7 +107,7 @@ final class HomeView: UIView {
         [contentView, scrollview]
             .forEach { addSubview($0) }
         
-        [titleLable, bookSeriseButton]
+        [titleLable, bookSeriesButton]
             .forEach { contentView.addSubview($0) }
         
         
@@ -146,14 +152,15 @@ final class HomeView: UIView {
             $0.leading.equalToSuperview().offset(Constants.Spacing.spacing20)
         }
         
-        bookSeriseButton.snp.makeConstraints {
+        bookSeriesButton.snp.makeConstraints {
             $0.top.equalTo(titleLable.snp.bottom).offset(Constants.Spacing.spacing18)
+            $0.bottom.equalTo(contentView.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(Constants.Components.buttonSize)
         }
         
         scrollview.snp.makeConstraints {
-            $0.top.equalTo(bookSeriseButton.snp.bottom).offset(Constants.Spacing.spacing20)
+            $0.top.equalTo(contentView.snp.bottom).offset(Constants.Spacing.spacing20)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
@@ -172,26 +179,3 @@ final class HomeView: UIView {
         }
     }
 }
-
-
-
-// MARK: - SwiftUI Preview
-struct ViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
-            .edgesIgnoringSafeArea(.all)
-//            .previewDevice("iPhone 16 Pro")
-    }
-}
-
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-
-    func makeUIViewController(context: Context) -> HomeViewController {
-        return HomeViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: HomeViewController, context: Context) {
-        // 필요하면 업데이트 로직 추가
-    }
-}
-

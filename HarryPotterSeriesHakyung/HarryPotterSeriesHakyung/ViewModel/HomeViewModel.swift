@@ -14,11 +14,13 @@ final class HomeViewModel {
     
     // Output: Data
     let books: CurrentValueSubject<[Book], Never>
+    let selectedBook: CurrentValueSubject<Book?, Never>
     
     // MARK: - Init
     
     init(books: [Book]) {
         self.books = CurrentValueSubject(books)
+        self.selectedBook = CurrentValueSubject(nil)
     }
     
     // MARK: - Methods
@@ -33,5 +35,9 @@ final class HomeViewModel {
             print(error.errorDescription)
         }
         return result
+    }
+    
+    func selectBook(_ book: Book) {
+        selectedBook.send(book)
     }
 }
