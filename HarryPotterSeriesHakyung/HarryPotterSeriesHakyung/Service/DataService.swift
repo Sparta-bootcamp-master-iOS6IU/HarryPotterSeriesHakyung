@@ -31,8 +31,12 @@ class DataService {
             let decoded: APIResponse
             do {
                 decoded = try JSONDecoder().decode(APIResponse.self, from: data)
-                let bookResource = decoded.data.map { $0.attributes }
-                return .success(bookResource)
+                    let books = decoded.data.enumerated().map {
+                        var book = $0.element.attributes
+                        book.seriseNumber = $0.offset + 1
+                        return book
+                }
+                return .success(books)
             } catch {
                 throw ServiceError.decodingFailed(error: error)
             }

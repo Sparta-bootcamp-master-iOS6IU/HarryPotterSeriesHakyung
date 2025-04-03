@@ -8,6 +8,7 @@
 import Foundation
 
 struct Book: Codable {
+    var seriseNumber: Int? = nil
     let title: String
     let author: String
     let pages: Int
@@ -30,11 +31,11 @@ struct Book: Codable {
 }
 
 struct DataItem: Codable {
-    let attributes: Book
+    var attributes: Book
 }
 
 struct APIResponse: Codable {
-    let data: [DataItem]
+    var data: [DataItem]
 }
 
 extension Book {

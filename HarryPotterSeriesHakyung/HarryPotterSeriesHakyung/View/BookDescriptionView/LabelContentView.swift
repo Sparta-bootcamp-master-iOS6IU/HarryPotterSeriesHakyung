@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class LableContentView: UIView {
+final class LabelContentView: UIView {
     
     // MARK: - Components
     
@@ -66,7 +66,7 @@ final class LableContentView: UIView {
     }
 }
 
-extension LableContentView {
+extension LabelContentView {
     
     func truncateWithEllipsis(from text: String) -> String {
         if text.count >= 450 {
@@ -76,7 +76,7 @@ extension LableContentView {
     }
 }
 
-extension LableContentView: MoreLessButtonDelegate {
+extension LabelContentView: MoreLessButtonDelegate {
     
     func didMoreLessButtonToggle(toggle isExpanded: Bool, _ text: String) {
         let titleLable = self.label.text

@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import SnapKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         homeViewModel = HomeViewModel(books: Book.demo())
+        homeView.bookSeriseButton.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,5 +60,13 @@ class ViewController: UIViewController {
             alert.addAction(closeAction)
             self.present(alert, animated: true, completion: nil)
         }
+    }
+}
+
+extension HomeViewController: BookSeriseButtonDelegate {
+    func buttonDidTapped(index: Int) {
+        let currentBooks = self.homeViewModel.books.value
+        let newBooks: [Book] = [currentBooks[index]]
+        self.homeViewModel.books.send(newBooks)
     }
 }
