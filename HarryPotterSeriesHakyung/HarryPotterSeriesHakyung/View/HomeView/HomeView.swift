@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 
+
 final class HomeView: UIView {
     
     // MARK: - Components
@@ -142,6 +143,7 @@ final class HomeView: UIView {
     }
     
     private func configAutoLayout() {
+        
         contentView.snp.makeConstraints {
             $0.top.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
         }

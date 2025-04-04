@@ -84,13 +84,13 @@ final class BookSeriesButton: UIView {
     private func configUI() {
         hStackview.axis = .horizontal
         hStackview.distribution = .equalSpacing
-        hStackview.spacing = Constants.Spacing.spacing5
+        hStackview.spacing = Constants.Spacing.spacing10
     }
     
     private func configAutoLayout() {
         hStackview.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(Constants.Spacing.spacing35)
+            $0.centerX.equalToSuperview()
         }
     }
 }
