@@ -69,8 +69,8 @@ final class LabelContentView: UIView {
 extension LabelContentView {
     
     func truncateWithEllipsis(from text: String) -> String {
-        if text.count >= 450 {
-            let index = text.index(text.startIndex, offsetBy: 450)
+        if text.count >= Constants.MoreLessButton.wordLimit {
+            let index = text.index(text.startIndex, offsetBy: Constants.MoreLessButton.wordLimit)
             return String(text[..<index]) + StringConstants.LableContentView.shorteningMark
         } else { return text }
     }

@@ -50,8 +50,6 @@ final class MoreLessButton: UIView {
         delegate?.didMoreLessButtonToggle(toggle: isExpanded, receivedText)
     }
     
-    // UserDefaults
-    // Key: Book index, value: [isExpended state]
     private func configButtonTitle() {
         if isExpanded {
             button.setTitle(StringConstants.MoreLessView.less, for: .normal)

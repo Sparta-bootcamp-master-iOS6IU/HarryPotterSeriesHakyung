@@ -12,7 +12,6 @@ final class HomeViewModel {
     
     // MARK: - Properties
     
-    // Output: Data
     let books: CurrentValueSubject<[Book], Never>
     let selectedBook: CurrentValueSubject<Book?, Never>
     
@@ -25,8 +24,10 @@ final class HomeViewModel {
     
     // MARK: - Methods
     
-    // Input: User Action(= App Did Run)
-    func appDidRun() -> Result<[Book], ServiceError> {
+    /// `User`가 `App`을 실행시, 데이터를 불러와 `UI`에 보여준다.
+    ///
+    /// - Returns: 성공시 `[Book]`데이터, 실패시 `ServiceError` 리턴
+    func loadData() -> Result<[Book], ServiceError> {
         let result = DataService.fetchBooks(from: File.fileName)
         switch result {
         case .success(let data):

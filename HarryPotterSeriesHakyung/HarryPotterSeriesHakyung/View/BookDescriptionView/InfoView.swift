@@ -92,7 +92,7 @@ final class InfoView: UIView {
         // titleLableSmall
         titleLableSmall.font = .systemFont(ofSize: Constants.Text.fontSize20, weight: .bold)
         titleLableSmall.textColor = Color.Text.black
-        titleLableSmall.numberOfLines = 2
+        titleLableSmall.numberOfLines = Constants.Text.lines2
         
         // [hStackForAuthor]
         hStackForAuthor.axis = .horizontal

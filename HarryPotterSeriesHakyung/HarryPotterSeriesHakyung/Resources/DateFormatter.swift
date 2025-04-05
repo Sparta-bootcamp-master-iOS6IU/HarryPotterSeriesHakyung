@@ -14,10 +14,11 @@ enum DateFormat {
 
 struct StringDateFormatter {
     
-    /// formattedDateString
+    /// 원하는 형태의 데이터 포맷으로 변형한다.
     ///
-    /// Parameter: 변형하고 싶은 String type의 Date
-    /// Return: String type으로 들어온 Date를 원하는 형태로 변형한 값
+    /// - Parameters:
+    ///   - dateString: 변형하고 싶은 `String` 타입의 `Date`
+    /// - Returns: 원하는 형태로 변형한 `String` 값
     static func formattedDateString(from dateString: String) -> String {
         
         let formatter = DateFormatter()

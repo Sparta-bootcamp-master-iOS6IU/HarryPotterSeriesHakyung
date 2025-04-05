@@ -41,7 +41,7 @@ class HomeViewController: UIViewController {
     }
     
     private func checkBookResource() {
-        let result = homeViewModel.appDidRun()
+        let result = homeViewModel.loadData()
         switch result {
         case .success(_):
             homeView.updateViewData(from: homeViewModel)
