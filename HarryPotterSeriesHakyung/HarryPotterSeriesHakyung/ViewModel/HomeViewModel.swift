@@ -27,7 +27,7 @@ final class HomeViewModel {
     
     // Input: User Action(= App Did Run)
     func appDidRun() -> Result<[Book], ServiceError> {
-        let result = DataService.fetchBooks(from: "data")
+        let result = DataService.fetchBooks(from: File.fileName)
         switch result {
         case .success(let data):
             books.send(data)

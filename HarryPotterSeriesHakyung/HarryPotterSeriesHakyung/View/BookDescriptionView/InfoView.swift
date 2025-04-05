@@ -47,7 +47,7 @@ final class InfoView: UIView {
     
     func configData(with book: Book) {
         guard let seriseNumber = book.seriseNumber else { return }
-        imageview.image = UIImage(named: "harrypotter\(seriseNumber)")
+        imageview.image = UIImage(named: "\(Image.bookName)\(seriseNumber)")
         titleLableSmall.text = book.title
         authorName.text = book.author
         releasedDate.text = StringDateFormatter.formattedDateString(from: book.releaseDate)
@@ -90,8 +90,8 @@ final class InfoView: UIView {
         vStackView.spacing = Constants.Spacing.spacing8
         
         // titleLableSmall
-        titleLableSmall.font = .systemFont(ofSize: Constants.Text.textSize20, weight: .bold)
-        titleLableSmall.textColor = Constants.Text.textColorDefault
+        titleLableSmall.font = .systemFont(ofSize: Constants.Text.fontSize20, weight: .bold)
+        titleLableSmall.textColor = Color.Text.black
         titleLableSmall.numberOfLines = 2
         
         // [hStackForAuthor]
@@ -99,39 +99,39 @@ final class InfoView: UIView {
         hStackForAuthor.spacing = Constants.Spacing.spacing8
         
         // authorLable
-        authorLable.text = "Author"
-        authorLable.font = .systemFont(ofSize: Constants.Text.textSize16, weight: .bold)
-        authorLable.textColor = Constants.Text.textColorDefault
+        authorLable.text = StringConstants.BookInfo.author
+        authorLable.font = .systemFont(ofSize: Constants.Text.fontSize16, weight: .bold)
+        authorLable.textColor = Color.Text.black
         
         // authorName
-        authorName.font = .systemFont(ofSize: Constants.Text.textSize18)
-        authorName.textColor = Constants.Text.textColorDarkGray
+        authorName.font = .systemFont(ofSize: Constants.Text.fontSize18)
+        authorName.textColor = Color.Text.darkGray
         
         // [hStackForReleased]
         hStackForReleased.axis = .horizontal
         hStackForReleased.spacing = Constants.Spacing.spacing8
         
         // releasedLable
-        releasedLable.text = "Released"
-        releasedLable.font = .systemFont(ofSize: Constants.Text.textSize14, weight: .bold)
-        releasedLable.textColor = Constants.Text.textColorDefault
+        releasedLable.text = StringConstants.BookInfo.released
+        releasedLable.font = .systemFont(ofSize: Constants.Text.fontSize14, weight: .bold)
+        releasedLable.textColor = Color.Text.black
         
         // releasedDate
-        releasedDate.font = .systemFont(ofSize: Constants.Text.textSize14)
-        releasedDate.textColor = Constants.Text.textColorGray
+        releasedDate.font = .systemFont(ofSize: Constants.Text.fontSize14)
+        releasedDate.textColor = Color.Text.gray
         
         // [hStackForPages]
         hStackForPages.axis = .horizontal
         hStackForPages.spacing = Constants.Spacing.spacing8
         
         // pagesLable
-        pagesLable.text = "Pages"
-        pagesLable.font = .systemFont(ofSize: Constants.Text.textSize14, weight: .bold)
-        pagesLable.textColor = Constants.Text.textColorDefault
+        pagesLable.text = StringConstants.BookInfo.pages
+        pagesLable.font = .systemFont(ofSize: Constants.Text.fontSize14, weight: .bold)
+        pagesLable.textColor = Color.Text.black
         
         // pagesNumber
-        pagesNumber.font = .systemFont(ofSize: Constants.Text.textSize14)
-        pagesNumber.textColor = Constants.Text.textColorGray
+        pagesNumber.font = .systemFont(ofSize: Constants.Text.fontSize14)
+        pagesNumber.textColor = Color.Text.gray
     }
     
     private func configAutoLayout() {

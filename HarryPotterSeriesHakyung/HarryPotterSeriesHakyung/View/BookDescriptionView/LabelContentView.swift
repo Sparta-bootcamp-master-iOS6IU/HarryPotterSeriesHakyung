@@ -31,8 +31,8 @@ final class LabelContentView: UIView {
     // MARK: - Methods
     
     func configData(with lableText: String, contentText: String) {
-        label.text = "\(lableText)"
-        content.text = "\(contentText)"
+        label.text = lableText
+        content.text = contentText
     }
     
     private func configSubview() {
@@ -42,12 +42,12 @@ final class LabelContentView: UIView {
     
     private func configUI() {
         // label
-        label.font = .systemFont(ofSize: Constants.Text.textSize18, weight: .bold)
-        label.textColor = Constants.Text.textColorDefault
+        label.font = .systemFont(ofSize: Constants.Text.fontSize18, weight: .bold)
+        label.textColor = Color.Text.black
         
         // content
-        content.font = .systemFont(ofSize: Constants.Text.textSize14)
-        content.textColor = Constants.Text.textColorDarkGray
+        content.font = .systemFont(ofSize: Constants.Text.fontSize14)
+        content.textColor = Color.Text.darkGray
         content.numberOfLines = .zero
         
     }
@@ -71,7 +71,7 @@ extension LabelContentView {
     func truncateWithEllipsis(from text: String) -> String {
         if text.count >= 450 {
             let index = text.index(text.startIndex, offsetBy: 450)
-            return String(text[..<index]) + "..."
+            return String(text[..<index]) + StringConstants.LableContent.shorteningMark
         } else { return text }
     }
 }

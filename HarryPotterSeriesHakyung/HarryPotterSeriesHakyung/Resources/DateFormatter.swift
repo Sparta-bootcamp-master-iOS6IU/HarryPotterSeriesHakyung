@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum DateFormat {
+    static let defaultFormat = "yyyy-MM-dd"
+    static let format1 = "MMMM dd, yyyy"
+}
+
 struct StringDateFormatter {
     
     /// formattedDateString
@@ -16,10 +21,10 @@ struct StringDateFormatter {
     static func formattedDateString(from dateString: String) -> String {
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = DateFormat.defaultFormat
         
         if let date = formatter.date(from: dateString) {
-            formatter.dateFormat = "MMMM dd, yyyy"
+            formatter.dateFormat = DateFormat.format1
             return formatter.string(from: date)
         } else {
             return ""

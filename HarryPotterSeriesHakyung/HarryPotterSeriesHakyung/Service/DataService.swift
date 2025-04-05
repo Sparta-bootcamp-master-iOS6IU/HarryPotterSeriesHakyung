@@ -17,7 +17,7 @@ class DataService {
     static func fetchBooks(from fileName: String) -> Result<[Book], ServiceError> {
         
         do {
-            guard let file = Bundle.main.url(forResource: fileName, withExtension: "json") else {
+            guard let file = Bundle.main.url(forResource: fileName, withExtension: File.json) else {
                 throw ServiceError.invalidFile
             }
 

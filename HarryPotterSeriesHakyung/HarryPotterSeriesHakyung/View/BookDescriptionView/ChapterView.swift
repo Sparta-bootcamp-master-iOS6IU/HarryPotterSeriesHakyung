@@ -32,15 +32,15 @@ final class ChapterView: UIView {
     // MARK: - Methods
     
     func configData(with chapters: [Chapter]) {
-        self.chaptersLabel.text = "Chapters"
+        self.chaptersLabel.text = StringConstants.LableContent.chapters
         
         chapterContents.forEach { $0.removeFromSuperview() }
         
         self.chapterContents = chapters.map {
             let chapter = UILabel()
             chapter.text = $0.title
-            chapter.font = .systemFont(ofSize: Constants.Text.textSize14)
-            chapter.textColor = Constants.Text.textColorDarkGray
+            chapter.font = .systemFont(ofSize: Constants.Text.fontSize14)
+            chapter.textColor = Color.Text.darkGray
             vStackView.addArrangedSubview(chapter)
             return chapter
         }
@@ -60,8 +60,8 @@ final class ChapterView: UIView {
         vStackView.axis = .vertical
         vStackView.spacing = Constants.Spacing.spacing8
         
-        chaptersLabel.font = .systemFont(ofSize: Constants.Text.textSize18, weight: .bold)
-        chaptersLabel.textColor = Constants.Text.textColorDefault
+        chaptersLabel.font = .systemFont(ofSize: Constants.Text.fontSize18, weight: .bold)
+        chaptersLabel.textColor = Color.Text.black
     }
     
     private func configAutoLayout() {

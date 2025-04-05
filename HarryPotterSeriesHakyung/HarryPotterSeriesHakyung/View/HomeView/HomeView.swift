@@ -86,11 +86,11 @@ final class HomeView: UIView {
         infoView.configData(with: book)
         
         // LableContentView - Dedication
-        dedicationView.configData(with: "Dedication", contentText: book.dedication)
+        dedicationView.configData(with: StringConstants.Home.dedication, contentText: book.dedication)
 
         // LableContentView - Summary
         let truncatedSummary = summaryView.truncateWithEllipsis(from: book.summary)
-        summaryView.configData(with: "Summary", contentText: truncatedSummary)
+        summaryView.configData(with: StringConstants.Home.summary, contentText: truncatedSummary)
         
         // MoreLessButton
         moreLessButton.delegate = summaryView
@@ -126,9 +126,9 @@ final class HomeView: UIView {
         
         // titleLable
         titleLable.textAlignment = .center
-        titleLable.font = .systemFont(ofSize: Constants.Text.textSize24, weight: .bold)
-        titleLable.textColor = Constants.Text.textColorDefault
-        titleLable.numberOfLines = 2
+        titleLable.font = .systemFont(ofSize: Constants.Text.fontSize24, weight: .bold)
+        titleLable.textColor = Color.Text.black
+        titleLable.numberOfLines = Constants.Text.lines2
         
         // scrollview
         scrollview.isScrollEnabled = true

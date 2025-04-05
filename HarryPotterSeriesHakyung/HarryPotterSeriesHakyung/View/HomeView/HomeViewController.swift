@@ -48,12 +48,12 @@ class HomeViewController: UIViewController {
             
         case .failure(let error):
             let alert = UIAlertController(
-                title: "책 데이터 로드 실패",
+                title: StringConstants.Alert.failure,
                 message: error.errorDescription,
                 preferredStyle: .alert
             )
             let closeAction = UIAlertAction(
-                title: "확인",
+                title: StringConstants.Alert.cancel,
                 style: .cancel,
                 handler: nil
             )
