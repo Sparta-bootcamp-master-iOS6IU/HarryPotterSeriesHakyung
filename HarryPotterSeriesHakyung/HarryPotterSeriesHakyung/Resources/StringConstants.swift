@@ -9,7 +9,7 @@ import Foundation
 
 enum StringConstants {
     
-    enum Home {
+    enum HomeView {
         static let dedication = "Dedication"
         static let summary = "Summary"
     }
@@ -19,18 +19,18 @@ enum StringConstants {
         static let cancel = "확인"
     }
     
-    enum BookInfo {
+    enum InfoView {
         static let author = "Author"
         static let released = "Released"
         static let pages = "Pages"
     }
     
-    enum LableContent {
+    enum LableContentView {
         static let chapters = "Chapters"
         static let shorteningMark = "..."
     }
     
-    enum MoreLess {
+    enum MoreLessView {
         static let less = "접기"
         static let more = "더 보기"
     }

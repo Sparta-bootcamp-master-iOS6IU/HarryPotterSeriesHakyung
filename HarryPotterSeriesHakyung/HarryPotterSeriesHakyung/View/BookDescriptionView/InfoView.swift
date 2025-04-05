@@ -99,7 +99,7 @@ final class InfoView: UIView {
         hStackForAuthor.spacing = Constants.Spacing.spacing8
         
         // authorLable
-        authorLable.text = StringConstants.BookInfo.author
+        authorLable.text = StringConstants.InfoView.author
         authorLable.font = .systemFont(ofSize: Constants.Text.fontSize16, weight: .bold)
         authorLable.textColor = Color.Text.black
         
@@ -112,7 +112,7 @@ final class InfoView: UIView {
         hStackForReleased.spacing = Constants.Spacing.spacing8
         
         // releasedLable
-        releasedLable.text = StringConstants.BookInfo.released
+        releasedLable.text = StringConstants.InfoView.released
         releasedLable.font = .systemFont(ofSize: Constants.Text.fontSize14, weight: .bold)
         releasedLable.textColor = Color.Text.black
         
@@ -125,7 +125,7 @@ final class InfoView: UIView {
         hStackForPages.spacing = Constants.Spacing.spacing8
         
         // pagesLable
-        pagesLable.text = StringConstants.BookInfo.pages
+        pagesLable.text = StringConstants.InfoView.pages
         pagesLable.font = .systemFont(ofSize: Constants.Text.fontSize14, weight: .bold)
         pagesLable.textColor = Color.Text.black
         

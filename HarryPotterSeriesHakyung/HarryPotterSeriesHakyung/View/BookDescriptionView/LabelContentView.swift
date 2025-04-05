@@ -71,7 +71,7 @@ extension LabelContentView {
     func truncateWithEllipsis(from text: String) -> String {
         if text.count >= 450 {
             let index = text.index(text.startIndex, offsetBy: 450)
-            return String(text[..<index]) + StringConstants.LableContent.shorteningMark
+            return String(text[..<index]) + StringConstants.LableContentView.shorteningMark
         } else { return text }
     }
 }

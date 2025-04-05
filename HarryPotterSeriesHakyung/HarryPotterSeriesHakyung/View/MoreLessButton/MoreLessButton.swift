@@ -43,7 +43,7 @@ final class MoreLessButton: UIView {
         receivedDataIndex = "\(seriseNumber)"
         receivedText = book.summary
         
-        button.isHidden = receivedText.count < Constants.MoreLess.wordLimit
+        button.isHidden = receivedText.count < Constants.MoreLessButton.wordLimit
         
         getIsExpandedState()
         configButtonTitle()
@@ -54,9 +54,9 @@ final class MoreLessButton: UIView {
     // Key: Book index, value: [isExpended state]
     private func configButtonTitle() {
         if isExpanded {
-            button.setTitle(StringConstants.MoreLess.less, for: .normal)
+            button.setTitle(StringConstants.MoreLessView.less, for: .normal)
         } else {
-            button.setTitle(StringConstants.MoreLess.more, for: .normal)
+            button.setTitle(StringConstants.MoreLessView.more, for: .normal)
         }
         defaultsHandler.saveExpandedState(forKey: receivedDataIndex, value: [isExpanded])
     }

@@ -86,11 +86,11 @@ final class HomeView: UIView {
         infoView.configData(with: book)
         
         // LableContentView - Dedication
-        dedicationView.configData(with: StringConstants.Home.dedication, contentText: book.dedication)
+        dedicationView.configData(with: StringConstants.HomeView.dedication, contentText: book.dedication)
 
         // LableContentView - Summary
         let truncatedSummary = summaryView.truncateWithEllipsis(from: book.summary)
-        summaryView.configData(with: StringConstants.Home.summary, contentText: truncatedSummary)
+        summaryView.configData(with: StringConstants.HomeView.summary, contentText: truncatedSummary)
         
         // MoreLessButton
         moreLessButton.delegate = summaryView

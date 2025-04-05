@@ -32,7 +32,7 @@ final class ChapterView: UIView {
     // MARK: - Methods
     
     func configData(with chapters: [Chapter]) {
-        self.chaptersLabel.text = StringConstants.LableContent.chapters
+        self.chaptersLabel.text = StringConstants.LableContentView.chapters
         
         chapterContents.forEach { $0.removeFromSuperview() }
         

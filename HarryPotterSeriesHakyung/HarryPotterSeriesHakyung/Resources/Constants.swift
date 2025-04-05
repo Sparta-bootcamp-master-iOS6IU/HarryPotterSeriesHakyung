@@ -39,7 +39,7 @@ enum Constants {
         static let spacing35: CGFloat = 35
     }
     
-    enum MoreLess {
+    enum MoreLessButton {
         static let wordLimit: Int = 450
     }
 }
