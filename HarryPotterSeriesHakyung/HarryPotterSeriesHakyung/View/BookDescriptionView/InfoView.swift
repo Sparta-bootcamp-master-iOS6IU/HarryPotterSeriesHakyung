@@ -45,9 +45,9 @@ final class InfoView: UIView {
     
     // MARK: - Methods
     
-    func configData(with book: Book, _ dataIndex: Int) {
-        
-        imageview.image = UIImage(named: "harrypotter\(dataIndex + 1)")
+    func configData(with book: Book) {
+        guard let seriseNumber = book.seriseNumber else { return }
+        imageview.image = UIImage(named: "harrypotter\(seriseNumber)")
         titleLableSmall.text = book.title
         authorName.text = book.author
         releasedDate.text = StringDateFormatter.formattedDateString(from: book.releaseDate)

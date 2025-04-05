@@ -16,7 +16,6 @@ final class HomeView: UIView {
     // UI
     private var contentView = UIView()
     private var titleLable = UILabel()
-    private var numberButton = UIButton()
     
     private var scrollview = UIScrollView()
     private var contentSubView = UIView()
@@ -27,9 +26,10 @@ final class HomeView: UIView {
 
     // MARK: - Custom Views
     
+    var bookSeriesButton = BookSeriesButton()
     private let infoView = InfoView()
-    private let dedicationView = LableContentView()
-    private let summaryView = LableContentView()
+    private let dedicationView = LabelContentView()
+    private let summaryView = LabelContentView()
     private let chapterView = ChapterView()
     private let moreLessButton = MoreLessButton()
     
@@ -54,13 +54,17 @@ final class HomeView: UIView {
     /// Parameter: ViewController에서 넘어온 HarryPotterViewModel
     func updateViewData(from viewModel: HomeViewModel) {
         viewModel.books
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] books in
-                guard let self = self else { return }
-                // Comment For Level 5
-                // let dataIndex = Int.random(in: 0..<books.count)
-                let dataIndex = 5
-                self.updateUI(books, dataIndex)
+                guard let self else { return }
+                self.updateUI(with: books)
+            }.store(in: &subscriptions)
+        
+        viewModel.selectedBook
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] book in
+                guard let book else { return }
+                self?.updateUI(with: [book])
             }.store(in: &subscriptions)
     }
     
@@ -68,40 +72,44 @@ final class HomeView: UIView {
     ///
     /// Update된 [BookResource] 데이터를 UI에 적용
     /// Parameter: Update된 [BookResource] 데이터
-    private func updateUI(_ books: [Book], _ dataIndex: Int) {
+    private func updateUI(with books: [Book]) {
+        guard let book = books.first else { return }
+        
         // HomeView
-        configData(with: books[dataIndex], dataIndex)
+        configData(with: book)
+        
+        // BookSeriseButton
+        bookSeriesButton.configData(with: books)
         
         // InfoView
-        infoView.configData(with: books[dataIndex], dataIndex)
+        infoView.configData(with: book)
         
         // LableContentView - Dedication
-        dedicationView.configData(with: "Dedication", contentText: books[dataIndex].dedication)
+        dedicationView.configData(with: "Dedication", contentText: book.dedication)
 
         // LableContentView - Summary
-        let summary = books[dataIndex].summary
-        let truncatedSummary = summaryView.truncateWithEllipsis(from: summary)
+        let truncatedSummary = summaryView.truncateWithEllipsis(from: book.summary)
         summaryView.configData(with: "Summary", contentText: truncatedSummary)
         
         // MoreLessButton
         moreLessButton.delegate = summaryView
-        moreLessButton.configData(with: books[dataIndex].summary, dataIndex: dataIndex)
+        moreLessButton.configData(with: book)
         
         // ChapterView
-        chapterView.configData(with: books[dataIndex].chapters)
+        chapterView.configData(with: book.chapters)
     }
     
-    private func configData(with book: Book, _ dataIndex: Int) {
+    private func configData(with book: Book) {
         titleLable.text = book.title
-        numberButton.setTitle("\(dataIndex + 1)", for: .normal)
     }
     
     private func configSubview() {
         [contentView, scrollview]
             .forEach { addSubview($0) }
         
-        [titleLable, numberButton]
+        [titleLable, bookSeriesButton]
             .forEach { contentView.addSubview($0) }
+        
         
         [contentSubView, vStackView]
             .forEach { scrollview.addSubview($0) }
@@ -120,12 +128,6 @@ final class HomeView: UIView {
         titleLable.font = .systemFont(ofSize: Constants.Text.textSize24, weight: .bold)
         titleLable.textColor = Constants.Text.textColorDefault
         titleLable.numberOfLines = 2
-        
-        // numberButton
-        numberButton.setTitleColor(.white, for: .normal)
-        numberButton.titleLabel?.font = .boldSystemFont(ofSize: Constants.Components.buttonTitleSize)
-        numberButton.backgroundColor = Constants.Color.blue
-        numberButton.layer.cornerRadius = Constants.Components.buttonLength / 2
         
         // scrollview
         scrollview.isScrollEnabled = true
@@ -150,14 +152,15 @@ final class HomeView: UIView {
             $0.leading.equalToSuperview().offset(Constants.Spacing.spacing20)
         }
         
-        numberButton.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Components.buttonLength)
-            $0.top.equalTo(titleLable.snp.bottom).offset(Constants.Spacing.spacing16)
-            $0.centerX.equalToSuperview()
+        bookSeriesButton.snp.makeConstraints {
+            $0.top.equalTo(titleLable.snp.bottom).offset(Constants.Spacing.spacing18)
+            $0.bottom.equalTo(contentView.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(Constants.Components.buttonSize)
         }
         
         scrollview.snp.makeConstraints {
-            $0.top.equalTo(numberButton.snp.bottom).offset(Constants.Spacing.spacing10)
+            $0.top.equalTo(contentView.snp.bottom).offset(Constants.Spacing.spacing20)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
