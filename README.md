@@ -39,6 +39,7 @@ HarryPotterSeriesHakyung
 │   │   ├── Book.swift                              // 책 정보 모델  
 │   │   ├── Chapter.swift                           // 챕터 정보 모델  
 │   │   ├── data.json                              // JSON 데이터 
+│   │   ├── File.json                              // File Constants
 │   ├── Service
 │   │   ├── DataService.swift                       // 데이터 제공 서비스  
 │   │   ├── ServiceError.swift                      // 에러 처리  
@@ -47,7 +48,7 @@ HarryPotterSeriesHakyung
 │   │   ├── Constants.swift                          // 상수 관리  
 │   │   ├── DateFormatter.swift                      // 날짜 형식 변환  
 │   │   ├── Image.swift                              // 이미지 관련 유틸  
-│   │   ├── Label.swift                              // 뷰 별 Title Label 관리  
+│   │   ├── StringConstants.swift                    // String Constants
 │   ├── View
 │   │   ├── BookDescriptionView                      // 책 설명 관련 뷰  
 │   │   │   ├── ChapterView.swift  
