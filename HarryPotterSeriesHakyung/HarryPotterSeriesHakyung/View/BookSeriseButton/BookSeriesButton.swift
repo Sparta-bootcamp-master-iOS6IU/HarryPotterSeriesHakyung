@@ -49,8 +49,8 @@ final class BookSeriesButton: UIView {
         let button = UIButton(type: .system)
         button.tag = Int(index)
         button.setTitle("\(Int(index) + 1)", for: .normal)
-        button.setTitleColor((index == 0) ? Constants.Color.white : Constants.Color.blue, for: .normal)
-        button.backgroundColor = (index == 0) ? Constants.Color.blue : Constants.Color.lightGray
+        button.setTitleColor((index == 0) ? Color.Button.white : Color.Button.blue, for: .normal)
+        button.backgroundColor = (index == 0) ? Color.Button.blue : Color.Button.lightGray
         button.titleLabel?.font = .boldSystemFont(ofSize: Constants.Components.buttonTitleSize)
         button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         button.layer.cornerRadius = Constants.Components.buttonSize / 2
@@ -73,8 +73,8 @@ final class BookSeriesButton: UIView {
     }
     
     private func updateButtonStyle(_ button: UIButton, isSelected: Bool) {
-        button.backgroundColor = isSelected ? Constants.Color.blue : Constants.Color.lightGray
-        button.setTitleColor(isSelected ? Constants.Color.white : Constants.Color.blue, for: .normal)
+        button.backgroundColor = isSelected ? Color.Button.blue : Color.Button.lightGray
+        button.setTitleColor(isSelected ? Color.Button.white : Color.Button.blue, for: .normal)
     }
     
     private func configSubview() {
@@ -84,13 +84,13 @@ final class BookSeriesButton: UIView {
     private func configUI() {
         hStackview.axis = .horizontal
         hStackview.distribution = .equalSpacing
-        hStackview.spacing = Constants.Spacing.spacing5
+        hStackview.spacing = Constants.Spacing.spacing10
     }
     
     private func configAutoLayout() {
         hStackview.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(Constants.Spacing.spacing35)
+            $0.centerX.equalToSuperview()
         }
     }
 }

@@ -6,26 +6,16 @@
 //
 
 import Foundation
-import UIKit
 
 enum Constants {
     
     enum Text {
-        static let textSize14: CGFloat = 14
-        static let textSize16: CGFloat = 16
-        static let textSize18: CGFloat = 18
-        static let textSize20: CGFloat = 20
-        static let textSize24: CGFloat = 24
-        
-        static let textColorDefault: UIColor = .black
-        static let textColorGray: UIColor = .gray
-        static let textColorDarkGray: UIColor = .darkGray
-    }
-    
-    enum Color {
-        static let blue: UIColor = .systemBlue
-        static let lightGray: UIColor = .systemGray5
-        static let white: UIColor = .white
+        static let fontSize14: CGFloat = 14
+        static let fontSize16: CGFloat = 16
+        static let fontSize18: CGFloat = 18
+        static let fontSize20: CGFloat = 20
+        static let fontSize24: CGFloat = 24
+        static let lines2: Int = 2
     }
     
     enum Components {
@@ -47,5 +37,9 @@ enum Constants {
         static let spacing25: CGFloat = 25
         static let spacing30: CGFloat = 30
         static let spacing35: CGFloat = 35
+    }
+    
+    enum MoreLessButton {
+        static let wordLimit: Int = 450
     }
 }

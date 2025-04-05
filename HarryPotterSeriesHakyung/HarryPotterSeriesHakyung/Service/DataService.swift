@@ -10,14 +10,15 @@ import UIKit
 
 class DataService {
     
-    /// fetchBooks
+    /// 파일 이름으로 데이터를 불러오고, 불러오기 실패시 경우에 따라 에러를 `throw`한다.
     ///
-    /// Parameter: 해리포터 시리즈 데이터를 꺼내올 JSON file 이름
-    /// Return: 해리포터 시리즈 데이터
+    /// - Parameters:
+    ///   - fileName: 해리포터 시리즈 데이터를 꺼내올 `JSON` 파일 이름
+    /// - Returns: 성공시 해리포터 시리즈 데이터, 실패시 `ServiceError` 리턴
     static func fetchBooks(from fileName: String) -> Result<[Book], ServiceError> {
         
         do {
-            guard let file = Bundle.main.url(forResource: fileName, withExtension: "json") else {
+            guard let file = Bundle.main.url(forResource: fileName, withExtension: File.json) else {
                 throw ServiceError.invalidFile
             }
 

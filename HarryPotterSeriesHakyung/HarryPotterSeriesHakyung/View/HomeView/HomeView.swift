@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 import Combine
 
+
 final class HomeView: UIView {
     
     // MARK: - Components
     
-    // UI
     private var contentView = UIView()
     private var titleLable = UILabel()
     
@@ -21,7 +21,6 @@ final class HomeView: UIView {
     private var contentSubView = UIView()
     private var vStackView = UIStackView()
     
-    // COMBINE
     private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Custom Views
@@ -48,10 +47,10 @@ final class HomeView: UIView {
     
     // MARK: - Methods
     
-    /// updateViewData
+    /// `HomeViewModel`의 `Publisher`인 `books`를 구독하여 데이터를 전달받는다.
     ///
-    /// Published된 [BookResource]를 Subscribe하여 Receive 한다.
-    /// Parameter: ViewController에서 넘어온 HarryPotterViewModel
+    /// - Parameters:
+    ///   - viewModel: `ViewController`에서 넘어온 `HomeViewModel`
     func updateViewData(from viewModel: HomeViewModel) {
         viewModel.books
             .receive(on: DispatchQueue.main)
@@ -68,34 +67,26 @@ final class HomeView: UIView {
             }.store(in: &subscriptions)
     }
     
-    /// updateUI
+    /// Update된 `[Book]` 타입의 데이터를 `UI`에 적용한다.
     ///
-    /// Update된 [BookResource] 데이터를 UI에 적용
-    /// Parameter: Update된 [BookResource] 데이터
+    /// - Parameters:
+    ///   - books: Update된 `[Book]` 데이터
     private func updateUI(with books: [Book]) {
         guard let book = books.first else { return }
-        
-        // HomeView
         configData(with: book)
         
-        // BookSeriseButton
         bookSeriesButton.configData(with: books)
         
-        // InfoView
         infoView.configData(with: book)
         
-        // LableContentView - Dedication
-        dedicationView.configData(with: "Dedication", contentText: book.dedication)
+        dedicationView.configData(with: StringConstants.HomeView.dedication, contentText: book.dedication)
 
-        // LableContentView - Summary
         let truncatedSummary = summaryView.truncateWithEllipsis(from: book.summary)
-        summaryView.configData(with: "Summary", contentText: truncatedSummary)
+        summaryView.configData(with: StringConstants.HomeView.summary, contentText: truncatedSummary)
         
-        // MoreLessButton
         moreLessButton.delegate = summaryView
         moreLessButton.configData(with: book)
         
-        // ChapterView
         chapterView.configData(with: book.chapters)
     }
     
@@ -123,25 +114,23 @@ final class HomeView: UIView {
     private func configUI() {
         backgroundColor = .white
         
-        // titleLable
         titleLable.textAlignment = .center
-        titleLable.font = .systemFont(ofSize: Constants.Text.textSize24, weight: .bold)
-        titleLable.textColor = Constants.Text.textColorDefault
-        titleLable.numberOfLines = 2
+        titleLable.font = .systemFont(ofSize: Constants.Text.fontSize24, weight: .bold)
+        titleLable.textColor = Color.Text.black
+        titleLable.numberOfLines = Constants.Text.lines2
         
-        // scrollview
         scrollview.isScrollEnabled = true
         scrollview.alwaysBounceVertical = true
         scrollview.showsVerticalScrollIndicator = false
         scrollview.showsHorizontalScrollIndicator = false
         scrollview.isDirectionalLockEnabled = true
         
-        // vStackView
         vStackView.axis = .vertical
         vStackView.spacing = Constants.Spacing.spacing24
     }
     
     private func configAutoLayout() {
+        
         contentView.snp.makeConstraints {
             $0.top.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
         }
